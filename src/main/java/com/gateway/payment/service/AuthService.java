@@ -1,12 +1,12 @@
 package com.gateway.payment.service;
 
-import com.gateway.payment.dto.LoginRequest;
-import com.gateway.payment.dto.LoginResponse;
-import com.gateway.dto.UserRequest;
-import com.gateway.dto.UserResponse;
-import com.gateway.entity.User;
-import com.gateway.exception.BusinessException;
-import com.gateway.repository.UserRepository;
+import  com.gateway.payment.dto.LoginRequest;
+import  com.gateway.payment.dto.LoginResponse;
+import  com.gateway.payment.dto.UserRequest;
+import  com.gateway.payment.dto.UserResponse;
+import com.gateway.payment.entity.User;
+import com.gateway.payment.exception.BusinessException;
+import  com.gateway.payment.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -51,6 +51,7 @@ public class AuthService {
     }
 
     public UserResponse register(UserRequest request) {
-        return userService.create(request);
+        User user = userService.create(request);
+        return UserResponse.fromEntity(user);  // Converte User para UserResponse
     }
 }

@@ -61,7 +61,7 @@ public class Transaction {
 
     // Dados livres do lojista (ex: order_id, product_id, etc.)
     @Type(JsonType.class)
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition = "json")
     private Map<String, Object> metadata;
 
     // Referência externa do lojista (ex: ID do pedido no e-commerce)
