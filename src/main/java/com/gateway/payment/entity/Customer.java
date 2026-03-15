@@ -51,10 +51,6 @@ public class Customer {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    // Endereço embutido
-    @Embedded
-    private Address address;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Builder.Default
@@ -62,6 +58,10 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

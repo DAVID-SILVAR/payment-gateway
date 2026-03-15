@@ -1,10 +1,14 @@
 package com.gateway.payment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-@Embeddable
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "addresses")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,27 +16,39 @@ import lombok.*;
 @Builder
 public class Address {
 
-    @Column(name = "address_street")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String street;
 
-    @Column(name = "address_number")
+    @Column(nullable = false, length = 20)
     private String number;
 
-    @Column(name = "address_complement")
     private String complement;
 
-    @Column(name = "address_neighborhood")
+    @Column(nullable = false)
     private String neighborhood;
 
-    @Column(name = "address_city")
+    @Column(nullable = false)
     private String city;
 
-    @Column(name = "address_state", length = 2)
+    @Column(nullable = false, length = 2)
     private String state;
 
-    @Column(name = "address_zip_code", length = 9)
+    @Column(nullable = false, length = 9)
     private String zipCode;
 
-    @Column(name = "address_country", length = 2)
+    @Column(nullable = false, length = 2)
+    @Builder.Default
     private String country = "BR";
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }
